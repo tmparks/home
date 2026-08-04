@@ -1,0 +1,11 @@
+accessories/
+backups/
+node_modules/
+persist/
+
+*.json
+*.log
+
+.npmrc
+.uix-secrets
+startup.sh
