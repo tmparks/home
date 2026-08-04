@@ -1,6 +1,8 @@
+# Default dashboard
 views:
   - type: sections
     sections:
+      # Ad blocker
       - type: grid
         cards:
           - type: heading
@@ -41,6 +43,8 @@ views:
               - last_changed
             vertical: false
             features_position: bottom
+
+      # Window fan
       - type: grid
         cards:
           - type: heading
@@ -61,6 +65,8 @@ views:
             features:
               - type: target-temperature
             features_position: bottom
+
+      # Air conditioner
       - type: grid
         cards:
           - type: heading
