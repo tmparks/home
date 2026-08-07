@@ -1,0 +1,11 @@
+# Weekly chedule for air conditioner thermostat
+# Copy to schedules/
+air_conditioner_schedule:
+  name: "Air Conditioner Thermostat Schedule"
+  sunday: !include air_conditioner_daily.yaml
+  monday: !include air_conditioner_daily.yaml
+  tuesday: !include air_conditioner_daily.yaml
+  wednesday: !include air_conditioner_daily.yaml
+  thursday: !include air_conditioner_daily.yaml
+  friday: !include air_conditioner_daily.yaml
+  saturday: !include air_conditioner_daily.yaml
