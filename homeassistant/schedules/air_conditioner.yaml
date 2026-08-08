@@ -2,10 +2,38 @@
 # Copy to schedules/
 air_conditioner_schedule:
   name: "Air Conditioner Thermostat Schedule"
-  sunday: !include air_conditioner_daily.yaml
-  monday: !include air_conditioner_daily.yaml
-  tuesday: !include air_conditioner_daily.yaml
-  wednesday: !include air_conditioner_daily.yaml
-  thursday: !include air_conditioner_daily.yaml
-  friday: !include air_conditioner_daily.yaml
-  saturday: !include air_conditioner_daily.yaml
+  sunday: &daily
+    - from: "00:00:00"
+      to: "04:00:00"
+      data:
+        temperature: 68
+    - from: "04:00:00"
+      to: "07:00:00"
+      data:
+        temperature: 70
+    - from: "07:00:00"
+      to: "12:00:00"
+      data:
+        temperature: 90
+    - from: "12:00:00"
+      to: "16:00:00"
+      data:
+        temperature: 80
+    - from: "16:00:00"
+      to: "20:00:00"
+      data:
+        temperature: 76
+    - from: "20:00:00"
+      to: "22:00:00"
+      data:
+        temperature: 72
+    - from: "22:00:00"
+      to: "24:00:00"
+      data:
+        temperature: 70
+  monday: *daily
+  tuesday: *daily
+  wednesday: *daily
+  thursday: *daily
+  friday: *daily
+  saturday: *daily

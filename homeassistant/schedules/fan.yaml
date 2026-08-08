@@ -2,7 +2,7 @@
 # Copy to schedules/
 fan_schedule:
   name: "Fan Thermostat Schedule"
-  sunday:
+  sunday: &daily
     - from: "00:00:00"
       to: "16:00:00"
       data:
@@ -11,57 +11,9 @@ fan_schedule:
       to: "24:00:00"
       data:
         temperature: 75
-  monday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
-  tuesday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
-  wednesday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
-  thursday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
-  friday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
-  saturday:
-    - from: "00:00:00"
-      to: "16:00:00"
-      data:
-        temperature: 70
-    - from: "16:00:00"
-      to: "24:00:00"
-      data:
-        temperature: 75
+  monday: *daily
+  tuesday: *daily
+  wednesday: *daily
+  thursday: *daily
+  friday: *daily
+  saturday: *daily

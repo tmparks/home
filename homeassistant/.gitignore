@@ -14,7 +14,6 @@ tts/
 .HA_VERSION
 
 automations.yaml
-configuration.yaml
 scenes.yaml
 scripts.yaml
 secrets.yaml
