@@ -6,43 +6,16 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading_style: title
             heading: Ad Blocker
+            heading_style: title
           - type: tile
-            visibility:
-              - condition: state
-                entity: binary_sensor.ad_blocker_status
-                state: "on"
-            entity: input_button.pause_ad_blocker
-            name: Pause
-            show_entity_picture: false
-            hide_state: true
-            vertical: false
-            tap_action:
-              action: toggle
-            features_position: bottom
-          - type: tile
-            entity: input_button.resume_ad_blocker
-            name: Resume
-            show_entity_picture: false
-            hide_state: true
-            vertical: false
-            tap_action:
-              action: toggle
-            features_position: bottom
-            visibility:
-              - condition: state
-                entity: binary_sensor.ad_blocker_status
-                state: "off"
-          - type: tile
-            entity: binary_sensor.ad_blocker_status
-            name: Status
-            hide_state: false
+            entity: switch.ad_blocker
+            name: Pause/Resume
             state_content:
               - state
               - last_changed
-            vertical: false
-            features_position: bottom
+            features:
+              - type: toggle
 
       # Window fan
       - type: grid
@@ -53,15 +26,12 @@ views:
           - type: tile
             entity: climate.fan_thermostat
             name: On/Off
-            hide_state: true
-            vertical: false
             features:
               - type: climate-hvac-modes
             features_position: bottom
           - type: tile
             entity: climate.fan_thermostat
             name: Temperature
-            vertical: false
             features:
               - type: target-temperature
             features_position: bottom
@@ -72,44 +42,19 @@ views:
           - type: heading
             heading: Air Conditioner
             heading_style: title
-            icon: ""
           - type: tile
             entity: climate.air_conditioner
-            name: Mode
-            vertical: false
+            name: On/Off
             features:
               - style: icons
                 type: climate-hvac-modes
                 hvac_modes:
                   - "off"
-                  - cool
                   - auto
             features_position: bottom
           - type: tile
             entity: climate.air_conditioner
             name: Temperature
-            vertical: false
             features:
               - type: target-temperature
-            features_position: bottom
-
-      # Weather
-      - type: grid
-        cards:
-          - type: heading
-            heading: Weather
-            heading_style: title
-          - type: tile
-            entity: sensor.nws_kvgc_temperature
-            name: Temperature
-            vertical: false
-            features:
-              - type: trend-graph
-            features_position: bottom
-          - type: tile
-            entity: sensor.nws_kvgc_dew_point
-            name: Dew Point
-            vertical: false
-            features:
-              - type: trend-graph
             features_position: bottom

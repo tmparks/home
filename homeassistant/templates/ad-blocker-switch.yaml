@@ -1,0 +1,17 @@
+switch:
+  - name: Ad Blocker Switch
+    default_entity_id: switch.ad_blocker
+    unique_id: "2026-08-19 07:57:45"
+    variables:
+      pi_hole_switches: "{{ integration_entities('pi_hole') | select('match', '^switch\\.') | list }}"
+    state: "{{ pi_hole_switches | select('is_state', 'on') | list | length > 0 }}"
+    turn_on:
+      action: switch.turn_on
+      target:
+        entity_id: "{{ pi_hole_switches }}"
+    turn_off:
+      action: pi_hole.disable
+      data:
+        duration: "00:05:00"
+      target:
+        entity_id: "{{ pi_hole_switches }}"
