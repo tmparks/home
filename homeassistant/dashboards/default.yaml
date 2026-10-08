@@ -2,7 +2,6 @@
 views:
   - type: sections
     sections:
-      # Ad blocker
       - type: grid
         cards:
           - type: heading
@@ -16,45 +15,21 @@ views:
               - last_changed
             features:
               - type: toggle
-
-      # Window fan
       - type: grid
         cards:
           - type: heading
-            heading: Window Fan
+            heading: Upstairs
             heading_style: title
-          - type: tile
-            entity: climate.fan_thermostat
-            name: On/Off
-            features:
-              - type: climate-hvac-modes
-            features_position: bottom
-          - type: tile
-            entity: climate.fan_thermostat
-            name: Temperature
-            features:
-              - type: target-temperature
-            features_position: bottom
-
-      # Air conditioner
+          - type: thermostat
+            entity: climate.upstairs_fan
+          - type: thermostat
+            entity: climate.air_conditioner
+          - type: thermostat
+            entity: climate.upstairs_heater
       - type: grid
         cards:
           - type: heading
-            heading: Air Conditioner
             heading_style: title
-          - type: tile
-            entity: climate.air_conditioner
-            name: On/Off
-            features:
-              - style: icons
-                type: climate-hvac-modes
-                hvac_modes:
-                  - "off"
-                  - auto
-            features_position: bottom
-          - type: tile
-            entity: climate.air_conditioner
-            name: Temperature
-            features:
-              - type: target-temperature
-            features_position: bottom
+            heading: Downstairs
+          - type: thermostat
+            entity: climate.downstairs_heater
