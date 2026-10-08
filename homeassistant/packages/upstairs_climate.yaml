@@ -1,0 +1,202 @@
+# Upstairs climate control package
+climate:
+  - platform: generic_thermostat
+    name: Upstairs Heater
+    unique_id: "2026.09.27.20.38.28"
+    heater: switch.upstairs_plug
+    target_sensor: sensor.upstairs_temperature
+    ac_mode: false
+    min_temp: 40
+    max_temp: 80
+    away_temp: 50
+    comfort_temp: 65
+    target_temp_step: 1.0
+    precision: 0.1
+
+  - platform: generic_thermostat
+    name: Upstairs Fan
+    unique_id: "2026.10.07.19.50.38"
+    heater: switch.upstairs_plug
+    target_sensor: sensor.upstairs_temperature
+    ac_mode: true
+    min_temp: 60
+    max_temp: 90
+    target_temp_step: 1.0
+    precision: 0.1
+
+schedule:
+  upstairs:
+    name: Upstairs Schedule
+    sunday: &weekend
+      - from: "00:00:00"
+        to: "02:00:00"
+        data:
+          heat: 52
+          cool: 68
+      - from: "02:00:00"
+        to: "03:00:00"
+        data:
+          heat: 54
+          cool: 68
+      - from: "03:00:00"
+        to: "04:00:00"
+        data:
+          heat: 56
+          cool: 70
+      - from: "04:00:00"
+        to: "05:00:00"
+        data:
+          heat: 58
+          cool: 70
+      - from: "05:00:00"
+        to: "06:00:00"
+        data:
+          heat: 60
+          cool: 70
+      - from: "06:00:00"
+        to: "07:00:00"
+        data:
+          heat: 62
+          cool: 70
+      - from: "07:00:00"
+        to: "08:30:00"
+        data:
+          heat: 64
+          cool: 70
+      - from: "08:30:00"
+        to: "16:00:00"
+        data:
+          heat: 40
+          cool: 90
+      - from: "16:00:00"
+        to: "18:00:00"
+        data:
+          heat: 60
+          cool: 80
+      - from: "18:00:00"
+        to: "20:00:00"
+        data:
+          heat: 64
+          cool: 76
+      - from: "20:00:00"
+        to: "22:00:00"
+        data:
+          heat: 68
+          cool: 72
+      - from: "22:00:00"
+        to: "24:00:00"
+        data:
+          heat: 50
+          cool: 70
+    monday: &weekday
+      - from: "00:00:00"
+        to: "01:00:00"
+        data:
+          heat: 52
+          cool: 68
+      - from: "01:00:00"
+        to: "02:00:00"
+        data:
+          heat: 54
+          cool: 68
+      - from: "02:00:00"
+        to: "03:00:00"
+        data:
+          heat: 56
+          cool: 68
+      - from: "03:00:00"
+        to: "04:00:00"
+        data:
+          heat: 58
+          cool: 68
+      - from: "04:00:00"
+        to: "05:00:00"
+        data:
+          heat: 60
+          cool: 70
+      - from: "05:00:00"
+        to: "06:00:00"
+        data:
+          heat: 62
+          cool: 70
+      - from: "06:00:00"
+        to: "07:00:00"
+        data:
+          heat: 64
+          cool: 70
+      - from: "07:00:00"
+        to: "16:00:00"
+        data:
+          heat: 40
+          cool: 90
+      - from: "16:00:00"
+        to: "18:00:00"
+        data:
+          heat: 60
+          cool: 80
+      - from: "18:00:00"
+        to: "20:00:00"
+        data:
+          heat: 64
+          cool: 76
+      - from: "20:00:00"
+        to: "22:00:00"
+        data:
+          heat: 68
+          cool: 72
+      - from: "22:00:00"
+        to: "24:00:00"
+        data:
+          heat: 50
+          cool: 70
+    tuesday: *weekday
+    wednesday: *weekday
+    thursday: *weekday
+    friday: *weekday
+    saturday: *weekend
+
+automation:
+  - alias: Apply Upstairs Heating Schedule
+    description: 'Set a thermostat temperature according to a schedule'
+    id: "2026.09.28.21.05.49"
+    triggers:
+      - trigger: state
+        entity_id:
+          - schedule.upstairs
+        attribute: heat
+      - trigger: state
+        entity_id:
+          - climate.upstairs_heater
+        attribute: preset_mode
+    conditions:
+      - condition: state
+        entity_id: climate.upstairs_heater
+        attribute: preset_mode
+        state:
+          - none
+    actions:
+      - action: climate.set_temperature
+        target:
+          entity_id: climate.upstairs_heater
+        data:
+          temperature: "{{ state_attr('schedule.upstairs', 'heat') }}"
+        metadata: {}
+    mode: single
+
+  - alias: Apply Upstairs Cooling Schedule
+    description: 'Set a thermostat temperature according to a schedule'
+    id: "2026.09.28.21.06.13"
+    triggers:
+      - trigger: state
+        entity_id:
+          - schedule.upstairs
+        attribute: cool
+    conditions: []
+    actions:
+      - action: climate.set_temperature
+        target:
+          entity_id: climate.air_conditioner
+        data:
+          temperature: "{{ state_attr('schedule.upstairs', 'cool') }}"
+        metadata: {}
+    mode: single
