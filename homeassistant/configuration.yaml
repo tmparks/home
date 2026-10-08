@@ -1,4 +1,3 @@
-
 # Loads default set of integrations. Do not remove.
 default_config:
 
@@ -12,9 +11,10 @@ scene: !include scenes.yaml
 
 # Do not make any changes above this line!
 
-schedule: !include_dir_merge_named schedules
-
 template: !include_dir_list templates
+
+homeassistant:
+  packages: !include_dir_named packages
 
 lovelace:
   dashboards:
