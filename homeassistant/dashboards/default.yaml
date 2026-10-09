@@ -20,16 +20,48 @@ views:
           - type: heading
             heading: Upstairs
             heading_style: title
-          - type: thermostat
+          - type: tile
             entity: climate.upstairs_fan
-          - type: thermostat
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.upstairs_fan") }}'
+          - type: tile
             entity: climate.air_conditioner
-          - type: thermostat
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.air_conditioner") }}'
+          - type: tile
             entity: climate.upstairs_heater
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.upstairs_heater") }}'
       - type: grid
         cards:
           - type: heading
             heading_style: title
             heading: Downstairs
-          - type: thermostat
+          - type: tile
             entity: climate.downstairs_heater
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.downstairs_heater") }}'
