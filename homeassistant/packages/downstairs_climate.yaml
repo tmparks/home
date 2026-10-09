@@ -1,4 +1,7 @@
 # Downstairs climate control package
+
+# Because initial_hvac_mode and target_temp are not specified,
+# the thermostat will be restored to its previous state upon restart
 climate:
   - platform: generic_thermostat
     name: Downstairs Heater
@@ -13,16 +16,13 @@ climate:
     target_temp_step: 1.0
     precision: 0.1
 
+# The schedule avoids temperatures associated with presets of
+# the generic thermostat (away, comfort, ...)
 schedule:
   downstairs:
     name: Downstairs Schedule
     sunday: &weekend
       - from: "00:00:00"
-        to: "02:00:00"
-        data:
-          heat: 50
-          cool: 80
-      - from: "02:00:00"
         to: "03:00:00"
         data:
           heat: 52
@@ -64,11 +64,6 @@ schedule:
           cool: 80
     monday: &weekday
       - from: "00:00:00"
-        to: "01:00:00"
-        data:
-          heat: 50
-          cool: 80
-      - from: "01:00:00"
         to: "02:00:00"
         data:
           heat: 52

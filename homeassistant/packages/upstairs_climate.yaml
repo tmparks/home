@@ -1,4 +1,7 @@
 # Upstairs climate control package
+
+# Because initial_hvac_mode and target_temp are not specified,
+# the thermostat will be restored to its previous state upon restart
 climate:
   - platform: generic_thermostat
     name: Upstairs Heater
@@ -24,6 +27,8 @@ climate:
     target_temp_step: 1.0
     precision: 0.1
 
+# The schedule avoids temperatures associated with presets of
+# the generic thermostat (away, comfort, ...)
 schedule:
   upstairs:
     name: Upstairs Schedule
@@ -86,7 +91,7 @@ schedule:
       - from: "22:00:00"
         to: "24:00:00"
         data:
-          heat: 50
+          heat: 52
           cool: 70
     monday: &weekday
       - from: "00:00:00"
@@ -147,7 +152,7 @@ schedule:
       - from: "22:00:00"
         to: "24:00:00"
         data:
-          heat: 50
+          heat: 52
           cool: 70
     tuesday: *weekday
     wednesday: *weekday
