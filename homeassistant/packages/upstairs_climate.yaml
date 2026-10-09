@@ -1,7 +1,9 @@
 # Upstairs climate control package
 
 # Because initial_hvac_mode and target_temp are not specified,
-# the thermostat will be restored to its previous state upon restart
+# the thermostat will be restored to its previous state upon restart.
+# Because preset temperatures (away, comfort, ...) are not integers,
+# it is not possible to accidentally enable a preset.
 climate:
   - platform: generic_thermostat
     name: Upstairs Heater
@@ -11,8 +13,8 @@ climate:
     ac_mode: false
     min_temp: 40
     max_temp: 80
-    away_temp: 50
-    comfort_temp: 65
+    away_temp: 50.1    # not an integer (see target_temp_step)
+    comfort_temp: 65.1 # not an integer (see target_temp_step)
     target_temp_step: 1.0
     precision: 0.1
 
@@ -27,13 +29,17 @@ climate:
     target_temp_step: 1.0
     precision: 0.1
 
-# The schedule avoids temperatures associated with presets of
-# the generic thermostat (away, comfort, ...)
+# The schedule avoids preset temperatures (away, comfort, ...)
 schedule:
   upstairs:
     name: Upstairs Schedule
     sunday: &weekend
       - from: "00:00:00"
+        to: "01:00:00"
+        data:
+          heat: 50
+          cool: 68
+      - from: "01:00:00"
         to: "02:00:00"
         data:
           heat: 52
@@ -61,12 +67,12 @@ schedule:
       - from: "06:00:00"
         to: "07:00:00"
         data:
-          heat: 62
+          heat: 62.5
           cool: 70
       - from: "07:00:00"
         to: "08:30:00"
         data:
-          heat: 64
+          heat: 65
           cool: 70
       - from: "08:30:00"
         to: "16:00:00"
@@ -91,7 +97,7 @@ schedule:
       - from: "22:00:00"
         to: "24:00:00"
         data:
-          heat: 52
+          heat: 50
           cool: 70
     monday: &weekday
       - from: "00:00:00"
@@ -122,12 +128,12 @@ schedule:
       - from: "05:00:00"
         to: "06:00:00"
         data:
-          heat: 62
+          heat: 62.5
           cool: 70
       - from: "06:00:00"
         to: "07:00:00"
         data:
-          heat: 64
+          heat: 65
           cool: 70
       - from: "07:00:00"
         to: "16:00:00"
@@ -152,7 +158,7 @@ schedule:
       - from: "22:00:00"
         to: "24:00:00"
         data:
-          heat: 52
+          heat: 50
           cool: 70
     tuesday: *weekday
     wednesday: *weekday
