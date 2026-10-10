@@ -35,41 +35,26 @@ schedule:
     name: Upstairs Schedule
     sunday: &weekend
       - from: "00:00:00"
-        to: "01:00:00"
-        data:
-          heat: 50
-          cool: 68
-      - from: "01:00:00"
-        to: "02:00:00"
-        data:
-          heat: 52
-          cool: 68
-      - from: "02:00:00"
         to: "03:00:00"
         data:
-          heat: 54
+          heat: 50
           cool: 68
       - from: "03:00:00"
         to: "04:00:00"
         data:
-          heat: 56
-          cool: 70
+          heat: 55
+          cool: 68
       - from: "04:00:00"
         to: "05:00:00"
         data:
-          heat: 58
-          cool: 70
-      - from: "05:00:00"
-        to: "06:00:00"
-        data:
           heat: 60
           cool: 70
-      - from: "06:00:00"
-        to: "07:00:00"
+      - from: "05:00:00"
+        to: "06:30:00"
         data:
-          heat: 62.5
+          heat: 63
           cool: 70
-      - from: "07:00:00"
+      - from: "06:30:00"
         to: "08:30:00"
         data:
           heat: 65
@@ -101,24 +86,14 @@ schedule:
           cool: 70
     monday: &weekday
       - from: "00:00:00"
-        to: "01:00:00"
-        data:
-          heat: 52
-          cool: 68
-      - from: "01:00:00"
-        to: "02:00:00"
-        data:
-          heat: 54
-          cool: 68
-      - from: "02:00:00"
         to: "03:00:00"
         data:
-          heat: 56
+          heat: 50
           cool: 68
       - from: "03:00:00"
         to: "04:00:00"
         data:
-          heat: 58
+          heat: 55
           cool: 68
       - from: "04:00:00"
         to: "05:00:00"
@@ -128,7 +103,7 @@ schedule:
       - from: "05:00:00"
         to: "06:00:00"
         data:
-          heat: 62.5
+          heat: 63
           cool: 70
       - from: "06:00:00"
         to: "07:00:00"

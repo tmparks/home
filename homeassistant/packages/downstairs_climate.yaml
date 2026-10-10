@@ -22,43 +22,33 @@ climate:
 schedule:
   downstairs:
     name: Downstairs Schedule
-    sunday: &weekend
+    sunday: &daily
       - from: "00:00:00"
         to: "02:00:00"
         data:
-          heat: 50
+          heat: 45
           cool: 80
       - from: "02:00:00"
         to: "03:00:00"
         data:
-          heat: 52
+          heat: 50
           cool: 80
       - from: "03:00:00"
         to: "04:00:00"
         data:
-          heat: 54
+          heat: 55
           cool: 80
       - from: "04:00:00"
         to: "05:00:00"
         data:
-          heat: 56
+          heat: 60
           cool: 80
       - from: "05:00:00"
         to: "06:00:00"
         data:
-          heat: 58
+          heat: 63
           cool: 80
       - from: "06:00:00"
-        to: "07:00:00"
-        data:
-          heat: 60
-          cool: 80
-      - from: "07:00:00"
-        to: "08:00:00"
-        data:
-          heat: 62.5
-          cool: 80
-      - from: "08:00:00"
         to: "21:00:00"
         data:
           heat: 65
@@ -68,57 +58,12 @@ schedule:
         data:
           heat: 40
           cool: 80
-    monday: &weekday
-      - from: "00:00:00"
-        to: "01:00:00"
-        data:
-          heat: 50
-          cool: 80
-      - from: "01:00:00"
-        to: "02:00:00"
-        data:
-          heat: 52
-          cool: 80
-      - from: "02:00:00"
-        to: "03:00:00"
-        data:
-          heat: 54
-          cool: 80
-      - from: "03:00:00"
-        to: "04:00:00"
-        data:
-          heat: 56
-          cool: 80
-      - from: "04:00:00"
-        to: "05:00:00"
-        data:
-          heat: 58
-          cool: 80
-      - from: "05:00:00"
-        to: "06:00:00"
-        data:
-          heat: 60
-          cool: 80
-      - from: "06:00:00"
-        to: "07:00:00"
-        data:
-          heat: 62.5
-          cool: 80
-      - from: "07:00:00"
-        to: "21:00:00"
-        data:
-          heat: 65
-          cool: 75
-      - from: "21:00:00"
-        to: "24:00:00"
-        data:
-          heat: 40
-          cool: 80
-    tuesday: *weekday
-    wednesday: *weekday
-    thursday: *weekday
-    friday: *weekday
-    saturday: *weekend
+    monday: *daily
+    tuesday: *daily
+    wednesday: *daily
+    thursday: *daily
+    friday: *daily
+    saturday: *daily
 
 automation:
   - alias: Apply Downstairs Heating Schedule
