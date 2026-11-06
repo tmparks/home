@@ -1,2 +1,7 @@
 .devcontainer/
 .vscode/
+esphome/
+matter-server/
+otbr/
+
+.env

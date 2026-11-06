@@ -1,8 +1,10 @@
 .cache/
 .cloud/
 .storage/
+backups/
 blueprints/automation/homeassistant/
 blueprints/script/homeassistant/
+blueprints/template/homeassistant/
 custom_components/
 deps/
 tts/
