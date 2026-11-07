@@ -53,8 +53,8 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading_style: title
             heading: Downstairs
+            heading_style: title
           - type: tile
             entity: climate.downstairs_heater
             state_content:
@@ -65,3 +65,14 @@ views:
             visibility:
               - condition: template
                 value_template: '{{ not is_hidden_entity("climate.downstairs_heater") }}'
+      - type: grid
+        cards:
+          - type: heading
+            heading: Outdoors
+            heading_style: title
+          - type: tile
+            entity: light.back_door
+            name: Back Door
+            features:
+              - type: toggle
+            features_position: bottom
