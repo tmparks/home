@@ -13,7 +13,6 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     volumes:
       - ./homeassistant:/config
-      - ../../bm1549/home-assistant-frigidaire/custom_components/frigidaire:/config/custom_components/frigidaire
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     # devices:
@@ -25,7 +24,6 @@ services:
     environment:
       TZ: America/New_York
 
-  # https://github.com/matter-js/python-matter-server/blob/main/docs/docker.md
   # https://github.com/matter-js/matterjs-server/blob/main/docs/docker.md
   # https://github.com/matter-js/matterjs-server/blob/main/docs/migration.md
   # https://github.com/matter-js/matterjs-server/blob/main/docker/matterjs-server/docker-compose.yml
