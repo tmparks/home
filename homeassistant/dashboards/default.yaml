@@ -1,0 +1,78 @@
+# Default dashboard
+views:
+  - type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ad Blocker
+            heading_style: title
+          - type: tile
+            entity: switch.ad_blocker
+            name: Pause/Resume
+            state_content:
+              - state
+              - last_changed
+            features:
+              - type: toggle
+      - type: grid
+        cards:
+          - type: heading
+            heading: Upstairs
+            heading_style: title
+          - type: tile
+            entity: climate.upstairs_fan
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.upstairs_fan") }}'
+          - type: tile
+            entity: climate.air_conditioner
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.air_conditioner") }}'
+          - type: tile
+            entity: climate.upstairs_heater
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.upstairs_heater") }}'
+      - type: grid
+        cards:
+          - type: heading
+            heading: Downstairs
+            heading_style: title
+          - type: tile
+            entity: climate.downstairs_heater
+            state_content:
+              - current_temperature
+              - hvac_action
+            features:
+              - type: target-temperature
+            visibility:
+              - condition: template
+                value_template: '{{ not is_hidden_entity("climate.downstairs_heater") }}'
+      - type: grid
+        cards:
+          - type: heading
+            heading: Outdoors
+            heading_style: title
+          - type: tile
+            entity: light.back_door
+            name: Back Door
+            features:
+              - type: toggle
+            features_position: bottom

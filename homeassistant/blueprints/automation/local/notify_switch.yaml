@@ -1,0 +1,27 @@
+blueprint:
+  name: Switch Notification
+  description: Send a notification when a switch changes state
+  domain: automation
+  input:
+    switch:
+      name: Switch
+      description: Notifications are sent when this switch changes state
+      selector:
+        entity:
+          filter:
+            - domain: switch
+    recipients:
+      name: Recipients
+      description: Notifications are sent to these recipients
+      selector:
+        target:
+          entity:
+            - domain: notify
+triggers:
+  - trigger: state
+    entity_id: !input switch
+actions:
+  - action: notify.send_message
+    target: !input recipients
+    data:
+      message: "{{ trigger.to_state.name }} is now {{ trigger.to_state.state }}"

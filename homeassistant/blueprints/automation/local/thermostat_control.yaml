@@ -1,0 +1,78 @@
+blueprint:
+  name: Thermostat Control
+  description: Turn a thermostat on or off when the outdoor temperature changes
+  domain: automation
+  input:
+    outdoor_temperature:
+      name: Outdoor temperature sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: temperature
+    indoor_temperature:
+      name: Indoor temperature sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: temperature
+    thermostat:
+      name: Thermostat
+      selector:
+        entity:
+          filter:
+            - domain: climate
+triggers:
+  - trigger: temperature.changed
+    target:
+      entity_id: !input outdoor_temperature
+    options:
+      threshold:
+        type: any
+actions:
+  - choose:
+    - conditions:
+        - condition: climate.is_hvac_mode
+          target:
+            entity_id: !input thermostat
+          options:
+            hvac_mode:
+              - cool
+        - condition: temperature.is_value
+          target:
+            entity_id: !input outdoor_temperature
+          options:
+            threshold:
+              type: below
+              value:
+                active_choice: entity
+                entity: !input indoor_temperature
+      sequence:
+        - action: climate.turn_on
+          target:
+            entity_id: !input thermostat
+    - conditions:
+        - condition: climate.is_hvac_mode
+          target:
+            entity_id: !input thermostat
+          options:
+            hvac_mode:
+              - heat
+        - condition: temperature.is_value
+          target:
+            entity_id: !input outdoor_temperature
+          options:
+            threshold:
+              type: above
+              value:
+                active_choice: entity
+                entity: !input indoor_temperature
+      sequence:
+        - action: climate.turn_on
+          target:
+            entity_id: !input thermostat
+    default:
+      - action: climate.turn_off
+        target:
+          entity_id: !input thermostat
