@@ -92,3 +92,12 @@ automation:
           temperature: "{{ state_attr('schedule.downstairs', 'heat') }}"
         metadata: {}
     mode: single
+
+template:
+  - use_blueprint:
+      path: local/dew_point.yaml
+      input:
+        temperature: sensor.downstairs_temperature
+        humidity: sensor.downstairs_humidity
+    name: Downstairs Dew Point
+    unique_id: "2026.11.14.19.21.04"

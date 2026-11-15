@@ -1,0 +1,36 @@
+blueprint:
+  name: Dew Point
+  description: Calculate dew point from temperature and relative humidity
+  domain: template
+  input:
+    temperature:
+      name: Temperature sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: temperature
+    humidity:
+      name: Humidity sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: humidity
+variables:
+  temperature: !input temperature
+  humidity: !input humidity
+sensor:
+  device_class: temperature
+  unit_of_measurement: °F
+  icon: mdi:thermometer-water
+  availability: "{{ has_value(temperature) and has_value(humidity) }}"
+  state: |
+    {# https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point #}
+    {% set t = (states(temperature) | float - 32.0) / 1.8 %}
+    {% set h = states(humidity) | float %}
+    {% set b = 17.625 %}
+    {% set c = 243.04 %}
+    {% set g = log(h/100.0) + b * t / (c + t) %}
+    {% set d = c * g / (b - g) %}
+    {{ (d  * 1.8) + 32.0 }}
